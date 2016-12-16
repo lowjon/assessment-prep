@@ -152,5 +152,4 @@ function countdownMaker(str, days) {
 /////boolean, etc)
 
  function notMyType(p) {
-   return typeof(p)
- }
+   return typeof(p) }

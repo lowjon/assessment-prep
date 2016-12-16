@@ -21,15 +21,15 @@ function theOverlord() {
 
 //Assign your answers to the variables below.
 //1. The value of rules if accessed from thePowerlessFigurehead
-var ans1 = '';
+var ans1 = 'love me plz';
 //2. The value of rules if accessed from theJudge
-var ans2 = '';
+var ans2 = 'cry all day';
 //3. The value of job if accessed from theOverlord
-var ans3 = '';
+var ans3 = undefined;
 //4. The value of job if accessed from thePowerlessFigurehead
-var ans4 = '';
+var ans4 = undefined;
 //5. The value of money if accessed from theTragicHumanitarian
-var ans5 = '';
+var ans5 = 'belongs to the overlord';
 
 ///Promises///
 
@@ -38,13 +38,33 @@ var ans5 = '';
 /////number in the Fibonacci sequence and resolve the promise
 /////with the answer when it completes.
 /////Fibonacci sequence:
-/////var fibonacci = function(n) {
-//     if(n <= 2) {
-//         return 1;
-//     } else {
-//         return this.recursive(n - 1) + this.recursive(n - 2);
-//     }
-// };
+    var fibonacci = function(n) {
+    if(n <= 2) {
+        return 1;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+};
+
+  function iPromise() {
+    var defer = $q.defer();
+    // var fun = function(){
+    //   var defer2 = $q.defer();
+    //   defer2.resolve(fibonacci(38));
+    //   return defer2;
+    // }
+    // fun().then(function(res){
+    //   console.log(res);
+    //   defer.resolve(res);
+    // })
+
+  return defer.promise;
+  }
+
+
+  // iPromise(38).then(function functionName() {
+
+  // })
 
 
 
@@ -54,19 +74,20 @@ var ans5 = '';
 /////to the contextObj, and with the two parameters passed in - return
 /////the result.
 function contextIt(myFn, contextObj, param1, param2) {
-
+ return myFn.call(contextObj, param1, param2)
 }
 
 //8. Do the same as you did in question 6, except with the
 /////paramArray passed in instead
 function contextIt2(myFn, contextObj, paramArray) {
-
+  return myFn.apply(contextObj, paramArray)
 }
 
 //9. Inside contextIt3, return a new function that permanently
 /////links myFn to the contextObj
 function contextIt3(myFn, contextObj) {
-
+  var newFxn = myFn.bind(contextObj)
+  return newFxn
 }
 
 
@@ -78,10 +99,25 @@ var bubbles = 0; //Ignore this line except to mourn our lack of bubbles.
 /////canFly; inside the function, assign each to an identically
 /////named property
 
+function Unicorn(hornColor,magicType,mana, canFly){
+  this.hornColor = hornColor;
+  this.magicType = magicType;
+  this.mana = mana;
+  this.canFly = canFly;
+  this.castBubbleWrapSpell = function () {
+    if (this.mana > 0){
+       bubbles += 100;
+      this.mana -= 15;
+      console.log(bubbles)
+    }
+  }
+}
+
+console.log(bubbles)
+
 //11. Add a prototype method to Unicorn called castBubbleWrapSpell
 /////which adds 100 to the global variable bubbles and takes away
 /////15 from mana on the unicorn until it hits zero.
-
 
 
 /////Closures/////
@@ -89,7 +125,11 @@ var bubbles = 0; //Ignore this line except to mourn our lack of bubbles.
 //12. Write a function called greetingMaker which takes in a name
 /////and returns a function that takes in a greeting and returns
 /////the name and the greeting concatenated together (in that order)
-
+function greetingMaker(name) {
+  return function (greeting) {
+    return name + greeting;
+  }
+}
 
 //13. Write a function called countdownMaker which takes in an
 /////event name (string) and how many days until it happens.
@@ -97,7 +137,12 @@ var bubbles = 0; //Ignore this line except to mourn our lack of bubbles.
 /////when invoked, takes one off of the days left and returns an
 /////object that looks like this:
 /////{event: <eventname>, daysLeft: <days left>}
-
+function countdownMaker(str, days) {
+  return function () {
+    days--;
+    return {event:str, daysLeft:days}
+  }
+}
 
 
 /////Type Checking/////
@@ -105,3 +150,7 @@ var bubbles = 0; //Ignore this line except to mourn our lack of bubbles.
 //14. Write a function called notMyType which takes in a parameter
 /////and returns the type of data of the parameter (number, string,
 /////boolean, etc)
+
+ function notMyType(p) {
+   return typeof(p)
+ }
